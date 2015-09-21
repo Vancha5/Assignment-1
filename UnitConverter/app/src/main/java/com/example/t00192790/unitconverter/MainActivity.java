@@ -4,8 +4,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     Button con;
@@ -16,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        km = (EditText) findViewById(R.id.editText);
-        mpg = (EditText) findViewById(R.id.editText2);
+        km = (EditText) findViewById(R.id.editText2);
+        mpg = (EditText) findViewById(R.id.editText);
         con = (Button) findViewById(R.id.button);
     }
 
@@ -42,4 +44,34 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    public void Convert(View v) {
+        double conversion;
+        String conv;
+        if(km.getText().toString().equals("") && mpg.getText().toString().equals("") ) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Please Enter a Value", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+        else if(mpg.getText().toString().equals("") ) {
+            conversion = Double.parseDouble(km.getText().toString()) * 0.42;
+            //conv = String.valueOf(conversion);
+            mpg.setText(String.format("%.2f", conversion));
+        }
+
+        else if(km.getText().toString().equals("")) {
+            conversion = Double.parseDouble(mpg.getText().toString()) * 2.35;
+            //conv = String.valueOf(conversion);
+            km.setText(String.format("%.2f", conversion));
+        }
+
+        else
+        {
+            conversion = Double.parseDouble(km.getText().toString()) * 0.42;
+            //conv = String.valueOf(conversion);
+            mpg.setText(String.format("%.2f", conversion));
+        }
+
+        }
 }
